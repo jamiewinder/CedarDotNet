@@ -1,0 +1,13 @@
+[package]
+name = "cedar-dotnet-ffi"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type=["cdylib"]
+
+[dependencies.cedar-policy]
+version = "4.4.0"
+git = "https://github.com/cedar-policy/cedar"
+branch = "main"
+features = ["partial-eval"]

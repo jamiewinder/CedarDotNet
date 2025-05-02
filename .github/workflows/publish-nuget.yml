@@ -1,0 +1,133 @@
+name: 🚀 Build, Test, Package, and Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-test:
+    name: 🛠️ Build & Test (${{ matrix.os }}-${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            rid: linux-x64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            rid: win-x64
+          #- os: macos-latest
+          #  target: x86_64-apple-darwin
+          #  rid: osx-x64
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🦀 Install Rust target
+        run: rustup target add ${{ matrix.target }}
+
+      - name: 🏗️ Build Rust FFI
+        run: cargo build --release --target ${{ matrix.target }}
+        working-directory: src/CedarDotNetFfi
+
+      - name: 📂 Copy native library
+        shell: bash
+        run: |
+          set -x  # Log each command
+
+          mkdir -p src/CedarDotNet/runtimes/${{ matrix.rid }}/native
+
+          case "${{ matrix.os }}" in
+            *windows*)
+              SRC="src/CedarDotNetFfi/target/${{ matrix.target }}/release/cedar_dotnet_ffi.dll"
+              ;;
+            *ubuntu*)
+              SRC="src/CedarDotNetFfi/target/${{ matrix.target }}/release/libcedar_dotnet_ffi.so"
+              ;;
+            *macos*)
+              SRC="src/CedarDotNetFfi/target/${{ matrix.target }}/release/libcedar_dotnet_ffi.dylib"
+              ;;
+            *)
+              echo "Unsupported OS: ${{ matrix.os }}"
+              exit 1
+              ;;
+          esac
+
+          ls -l "$SRC"  # List the source file for debugging
+
+          DEST="src/CedarDotNet/runtimes/${{ matrix.rid }}/native/"
+
+          ls -l "$DEST"  # List the destination directory for debugging
+
+          echo "Copying from: $SRC"
+          echo "To: $DEST"
+
+          cp "$SRC" "$DEST"
+          
+          ls -l "$DEST"  # List the destination directory for debugging
+
+      - name: 🛠️ Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: ✅ Run .NET tests
+        run: dotnet test
+
+      - name: 📦 Upload native binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: rustlib-${{ matrix.rid }}
+          path: src/CedarDotNet/runtimes/${{ matrix.rid }}/native/*
+
+  package:
+    name: 📦 Package NuGet
+    runs-on: ubuntu-latest
+    needs: build-test
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🪟 Download win-x64 native binary
+        uses: actions/download-artifact@v4
+        with:
+          name: rustlib-win-x64
+          path: src/CedarDotNet/runtimes/win-x64/native
+
+      - name: 🐧 Download linux-x64 native binary
+        uses: actions/download-artifact@v4
+        with:
+          name: rustlib-linux-x64
+          path: src/CedarDotNet/runtimes/linux-x64/native
+
+      #- name: 🍎 Download osx-x64 native binary
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: rustlib-osx-x64
+      #    path: src/CedarDotNet/runtimes/osx-x64/native
+
+      - name: 🛠️ Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 🏷️ Extract version from Git tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+    
+      - name: 📦 Pack NuGet package
+        run: dotnet pack src/CedarDotNet/CedarDotNet.csproj --configuration Release /p:PackageVersion=${{ env.VERSION }}
+
+      - name: 📤 Upload NuGet package
+        uses: actions/upload-artifact@v4
+        with:
+          name: cedar-nuget
+          path: src/CedarDotNet/bin/Release/*.nupkg
+
+      - name: 📤 Push to NuGet
+        run: dotnet nuget push src/CedarDotNet/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+  

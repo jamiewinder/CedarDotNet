@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<IsAotCompatible>true</IsAotCompatible>
+	</PropertyGroup>
+
+	<!-- Nuget properties -->
+	<PropertyGroup>
+		<PackageId>CedarDotNet</PackageId>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/jamiewinder/CedarDotNet</PackageProjectUrl>
+		<PackageTags>cedar policy engine authorization authorisation authz</PackageTags>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<Authors>Jamie Winder</Authors>
+		<Description>A Cedar library for .NET</Description>
+		<Copyright>Copyright (c) Jamie Winder 2025</Copyright>		
+	</PropertyGroup>
+
+	<!-- Nuget resources-->
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<None Include="images\icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<!-- Always pack the native libraries for all platforms -->
+	<ItemGroup>
+		<Content Include="runtimes\**" Pack="true" PackagePath="\runtimes" />
+	</ItemGroup>
+
+	<!-- OS-specific copying logic -->
+	<ItemGroup>
+		<None Include="runtimes\win-x64\native\cedar_dotnet_ffi.dll"
+			Condition="$([MSBuild]::IsOSPlatform('Windows'))"
+			CopyToOutputDirectory="PreserveNewest"
+			Link="cedar_dotnet_ffi.dll" />
+
+		<None Include="runtimes\linux-x64\native\libcedar_dotnet_ffi.so" 
+			Condition="$([MSBuild]::IsOSPlatform('Linux'))"
+			CopyToOutputDirectory="PreserveNewest"			  
+			Link="libcedar_dotnet_ffi.so" />
+
+		<None Include="runtimes\osx-x64\native\libcedar_dotnet_ffi.dylib" 
+			Condition="$([MSBuild]::IsOSPlatform('OSX'))"
+			CopyToOutputDirectory="PreserveNewest"			  
+			Link="libcedar_dotnet_ffi.dylib" />
+	</ItemGroup>
+	
+</Project>

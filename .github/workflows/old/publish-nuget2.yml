@@ -1,0 +1,109 @@
+name: Build Rust & C# NuGet Package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger on version tag pushes
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          # Define OS, Rust target, and NuGet RID for each platform/arch combo
+          # TODO: Re-enable Linux builds
+          #- os: ubuntu-latest
+          #  rust_target: x86_64-unknown-linux-gnu
+          #  runtime_id: linux-x64
+
+          - os: windows-latest
+            rust_target: x86_64-pc-windows-msvc
+            runtime_id: win-x64
+
+          # TODO: Re-enable MacOS builds
+          #- os: macos-latest
+          #  rust_target: x86_64-apple-darwin
+          #  runtime_id: osx-x64
+
+          # Disabling ARM64 builds for now
+          #- os: ubuntu-latest
+          #  rust_target: aarch64-unknown-linux-gnu
+          #  runtime_id: linux-arm64
+
+          #- os: windows-latest
+          #  rust_target: aarch64-pc-windows-msvc
+          #  runtime_id: win-arm64
+
+          #- os: macos-latest
+          #  rust_target: aarch64-apple-darwin
+          #  runtime_id: osx-arm64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: 📥 Checkout source code
+        uses: actions/checkout@v3
+
+      - name: 🦀 Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.rust_target }}
+          override: true
+
+      - name: 🚧 Add target
+        run: rustup target add ${{ matrix.rust_target }}
+
+      - name: 🛠️ Build Rust FFI library
+        working-directory: src/CedarDotNetFfi
+        run: cargo build --release --target ${{ matrix.rust_target }}
+
+      - name: 📦 Copy native lib to C# runtime layout
+        run: |
+          mkdir -p src/CedarDotNet/runtimes/${{ matrix.runtime_id }}/native
+          cp src/CedarDotNetFfi/target/${{ matrix.rust_target }}/release/*.dll src/CedarDotNet/runtimes/${{ matrix.runtime_id }}/native/ 2>/dev/null || true
+          cp src/CedarDotNetFfi/target/${{ matrix.rust_target }}/release/*.so  src/CedarDotNet/runtimes/${{ matrix.runtime_id }}/native/ 2>/dev/null || true
+          cp src/CedarDotNetFfi/target/${{ matrix.rust_target }}/release/*.dylib src/CedarDotNet/runtimes/${{ matrix.runtime_id }}/native/ 2>/dev/null || true
+
+      - name: 📤 Upload native lib artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-${{ matrix.runtime_id }}
+          path: src/CedarDotNet/runtimes/${{ matrix.runtime_id }}
+
+  package-and-publish:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
+      - name: 📥 Checkout source code
+        uses: actions/checkout@v3
+
+      - name: 📥 Download native lib artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: native-*
+          merge-multiple: true
+          path: ./CedarDotNet/runtimes
+
+      - name: 🧰 Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: 🔄 Restore .NET dependencies
+        working-directory: ./CedarDotNet
+        run: dotnet restore
+
+      - name: 🛠️ Build C# library
+        working-directory: ./CedarDotNet
+        run: dotnet build -c Release
+
+      - name: 📦 Pack NuGet
+        working-directory: ./CedarDotNet
+        run: dotnet pack -c Release -o out
+
+      - name: 🚀 Publish to NuGet.org
+        working-directory: ./CedarDotNet/out
+        run: dotnet nuget push *.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
