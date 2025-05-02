@@ -4,11 +4,11 @@ _layout: landing
 
 # CedarDotNet
 
-An unofficial .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
+An unofficial .NET library for the Cedar language. 
+
+This can be used to call Cedar functions from a .NET application.
 
 ---
-
-[Documentation](https://jamiewinder.github.io/CedarDotNet/)
 
 For more information about Cedar, please see:
 - https://www.cedarpolicy.com/
