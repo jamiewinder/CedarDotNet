@@ -1,6 +1,6 @@
 ﻿# 🌲 CedarDotNet
 
-This package provides a .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
+A .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
 
 For more information about Cedar, please see: https://www.cedarpolicy.com/
 
