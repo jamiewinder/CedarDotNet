@@ -4,14 +4,20 @@ _layout: landing
 
 # CedarDotNet
 
-A .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
+An unofficial .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
 
-For more information about Cedar, please see: https://www.cedarpolicy.com/
+---
+
+[Documentation](https://jamiewinder.github.io/CedarDotNet/)
+
+For more information about Cedar, please see:
+- https://www.cedarpolicy.com/
+- https://docs.cedarpolicy.com/
+
+## Getting Started
 
 > [!WARNING]
 > This package is still in early development and is only currently available as a pre-release.
-
-## Getting Started
 
 - Install the `CedarDotNet` package:
 
