@@ -4,7 +4,7 @@ namespace CedarDotNet.UnitTests;
 
 public sealed class CedarFunctionsTests
 {
-    private static Schema Schema = Schema.FromText("""
+    private static readonly Schema Schema = Schema.FromText("""
         entity User;
         entity Photo;
     
@@ -14,7 +14,7 @@ public sealed class CedarFunctionsTests
         };
         """);
 
-    private static PolicySet PolicySet = new PolicySet
+    private static readonly PolicySet PolicySet = new()
     {
         StaticPolicies = new Dictionary<string, string>
         {

@@ -7,7 +7,7 @@ public sealed record class IpAddrValue : Value
 {
     private static void ValidateValue(string value)
     {
-        // TODO: Need to follow this out.
+        // TODO: Need to figure this out.
     }
 
     /// <summary>
