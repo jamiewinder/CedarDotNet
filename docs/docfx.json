@@ -40,6 +40,7 @@
       "_appName": "CedarDotNet",
       "_appTitle": "CedarDotNet",
       "_appLogoPath": "images/icon.png",
+      "_appFaviconPath": "images/icon.png",
       "_enableSearch": false,
       "pdf": false
     },
