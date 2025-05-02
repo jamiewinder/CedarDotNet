@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src",
+          "files": [
+            "CedarDotNet/CedarDotNet.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "CedarDotNet",
+      "_appTitle": "CedarDotNet",
+      "_appLogoPath": "images/icon.png",
+      "_enableSearch": false,
+      "pdf": false
+    },
+    "markdownEngineProperties": {
+      "markdigExtensions": [
+          "Alerts"
+      ]
+    }
+  }
+}
