@@ -1,15 +1,21 @@
 ﻿# 🌲 CedarDotNet
 
-A .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
+![NuGet Version](https://img.shields.io/nuget/v/CedarDotNet)
+![NuGet Downloads](https://img.shields.io/nuget/dt/CedarDotNet)
 
-For more information about Cedar, please see: https://www.cedarpolicy.com/
 
-### Status
+An unofficial .NET library for the Cedar language. This can be used to call Cedar functions from a .NET application.
+
+---
+
+[Documentation](https://jamiewinder.github.io/CedarDotNet/)
+
+For more information about Cedar, please see:
+- https://www.cedarpolicy.com/
+- https://docs.cedarpolicy.com/
+
+
+## Status
 
 > [!WARNING]
-> This library is in early development.
-
-### To Do
-- Documentation
-- Fix MacOS target cross-compilation
-- Increase test coverage
+> This package is still in early development and is only currently available as a pre-release.
