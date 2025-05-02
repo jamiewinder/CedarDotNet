@@ -107,9 +107,9 @@ public static partial class CedarFunctions
     }
 
     /// <summary>
-    /// Gets the language version.
+    /// Gets the SDK version.
     /// </summary>
-    /// <returns>The language version.</returns>
+    /// <returns>The SDK version.</returns>
     public static string GetSdkVersion()
     {
         var resultPtr = CedarFfi.GetSdkVersion();
