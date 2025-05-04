@@ -1,7 +1,7 @@
 ﻿# 🌲 CedarDotNet
 
-![NuGet Version](https://img.shields.io/nuget/v/CedarDotNet)
-![NuGet Downloads](https://img.shields.io/nuget/dt/CedarDotNet)
+[![NuGet Version](https://img.shields.io/nuget/v/CedarDotNet)](https://www.nuget.org/packages/CedarDotNet)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/CedarDotNet)](https://www.nuget.org/packages/CedarDotNet)
 
 
 An unofficial .NET library for the Cedar language.
