@@ -4,7 +4,7 @@ using CedarDotNet.Models;
 namespace CedarDotNet;
 
 /// <summary>
-/// The Cedar functions.
+/// The Cedar functions available through the main Cedar FFI.
 /// </summary>
 public static partial class CedarFunctions
 {
