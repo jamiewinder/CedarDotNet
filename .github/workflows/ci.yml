@@ -76,6 +76,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: 🧪 Checkout Cedar integration test data
+        uses: actions/checkout@v4
+        with:
+          repository: cedar-policy/cedar-integration-tests
+          path: cedar-integration-tests
+
       - name: ✅ Run .NET tests
         run: dotnet test
 

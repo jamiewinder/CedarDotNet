@@ -9,4 +9,7 @@ internal static partial class CedarFfi
 
     [LibraryImport(CedarNativeLibrary.Name, EntryPoint = "policy_format_json_to_text", StringMarshalling = StringMarshalling.Utf8)]
     public static partial IntPtr PolicyFormatJsonToText(string call);
+
+    [LibraryImport(CedarNativeLibrary.Name, EntryPoint = "load_policy_set", StringMarshalling = StringMarshalling.Utf8)]
+    public static partial IntPtr LoadPolicySet(string text);
 }

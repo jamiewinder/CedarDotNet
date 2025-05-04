@@ -1,4 +1,7 @@
 ﻿using CedarDotNet.Interop;
+using CedarDotNet.Models;
+using System.Runtime.InteropServices;
+using System.Text.Json;
 
 namespace CedarDotNet;
 
@@ -28,4 +31,28 @@ public static class CedarUtilities
         => FfiUtilities.CallUnaryStr(
             policyJson,
             CedarFfi.PolicyFormatJsonToText);
+
+    /// <summary>
+    /// Loads a policy set from the given text.
+    /// </summary>
+    /// <param name="text">The policies text.</param>
+    /// <returns>The policy collection.</returns>
+    public static IReadOnlyCollection<string> LoadPolicySet(
+        string text)
+    {
+        var result = CedarFfi.LoadPolicySet(text);
+
+        try
+        {
+            var resultJson = Marshal.PtrToStringUTF8(result)!;
+
+            return JsonSerializer.Deserialize(
+                json: resultJson,
+                jsonTypeInfo: CedarJsonSerializerContext.Default.IReadOnlyCollectionString)!;
+        }
+        finally
+        {
+            CedarFfi.FreeString(result);
+        }
+    }
 }
