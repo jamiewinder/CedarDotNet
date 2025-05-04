@@ -19,14 +19,16 @@ For more information about Cedar, please see:
 > [!WARNING]
 > This package is still in early development and is only currently available as a pre-release.
 
-- Install the `CedarDotNet` package:
+1. Install the `CedarDotNet` package:
 
 ```sh
 dotnet add package CedarDotNet --prerelease
 ```
 
-- Refer to the following documentation for API details:
+2. Refer to the documentation for API details.
 
 - [CedarFunctions](xref:CedarDotNet.CedarFunctions) for the stable functions.
+
 - [CedarExperimentalFunctions](xref:CedarDotNet.CedarFunctions) for the experimental functions.
+
 - [CedarUtilities](xref:CedarDotNet.CedarFunctions) for additional utilities which aren't part of the main API.
