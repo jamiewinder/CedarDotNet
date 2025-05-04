@@ -1,4 +1,5 @@
-﻿using CedarDotNet.Models;
+﻿using CedarDotNet.Interop;
+using CedarDotNet.Models;
 using System.Diagnostics.CodeAnalysis;
 namespace CedarDotNet;
 
@@ -15,7 +16,7 @@ public static partial class CedarFunctions
     [Experimental(Experimental.CedarPartialExpressions)]
     public static IPartialAuthorizationAnswer IsAuthorizedPartial(
         PartialAuthorizationCall call)
-        => WrapJsonCall(
+        => FfiUtilities.CallUnaryJson(
             input: call,
             func: CedarFfi.IsAuthorizedPartial,
             inputTypeInfo: CedarExperimentalJsonSerializerContext.Default.PartialAuthorizationCall,

@@ -1,5 +1,7 @@
 use std::ffi::{c_char, CString, CStr};
 
+use cedar_policy::Policy;
+
 use cedar_policy::ffi::{
     check_parse_policy_set_json_str,
     check_parse_schema_json_str,
@@ -106,4 +108,28 @@ pub extern "C" fn get_sdk_version() -> *const c_char {
     let result_str = internal_get_sdk_version();
 
     CString::new(result_str).unwrap().into_raw()
+}
+
+// -- Utilities --
+
+#[unsafe(no_mangle)]
+pub fn policy_format_text_to_json(text: *const c_char) -> *const c_char {
+    let text_str = unsafe { CStr::from_ptr(text).to_str().unwrap() };
+
+    let policy = Policy::parse(None, text_str).expect("Could not parse policy text");
+
+    let value = policy.to_json().expect("Could not serialise response");
+
+    CString::new(value.to_string()).unwrap().into_raw()
+}
+
+#[unsafe(no_mangle)]
+pub fn policy_format_json_to_text(json: *const c_char) -> *const c_char {
+    let json_str = unsafe { CStr::from_ptr(json).to_str().unwrap() };
+
+    let value = serde_json::from_str(json_str).expect("Could not parse policy JSON");
+
+    let policy = Policy::from_json(None, value).expect("Could not create policy from JSON");
+
+    CString::new(policy.to_string()).unwrap().into_raw()
 }

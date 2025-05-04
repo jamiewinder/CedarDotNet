@@ -118,6 +118,7 @@ name = "cedar-dotnet-ffi"
 version = "0.1.0"
 dependencies = [
  "cedar-policy",
+ "serde_json",
 ]
 
 [[package]]

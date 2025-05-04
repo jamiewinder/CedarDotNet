@@ -155,6 +155,10 @@ TestCheckParseContext(new()
 
 Console.WriteLine();
 
+TestPolicyFormatToJsonToText(policySet.StaticPolicies.First().Value);
+
+Console.WriteLine();
+
 static void TestIsAuthorized(AuthorizationCall call)
 {
     var answer = CedarFunctions.IsAuthorized(call);
@@ -209,4 +213,17 @@ static void TestCheckParseContext(ContextParsingCall call)
 
     WriteTitle("CheckParseContext");
     WriteAnswer(answer);
+}
+
+static void TestPolicyFormatToJsonToText(string policyText)
+{
+    var policyJson = CedarUtilities.PolicyFormatTextToJson(policyText);
+
+    WriteTitle("PolicyFormatTextToJson");
+    WriteAnswer(policyJson);
+
+    var policyTest2 = CedarUtilities.PolicyFormatJsonToText(policyJson);
+
+    WriteTitle("PolicyFormatJsonToText");
+    WriteAnswer(policyTest2);
 }

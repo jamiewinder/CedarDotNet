@@ -29,7 +29,7 @@ public sealed class CedarFunctionsTests
     };
 
     [Fact]
-    public void IsAuthorized_SimpleTest_Success()
+    public void IsAuthorized_AuthorisableRequest_DecisionIsAllow()
     {
         var result = CedarFunctions.IsAuthorized(new()
         {
@@ -51,7 +51,7 @@ public sealed class CedarFunctionsTests
     }
 
     [Fact]
-    public void IsAuthorized_SimpleTest_Failure()
+    public void IsAuthorized_NonAuthorisableRequest_DecisionIsDeny()
     {
         var result = CedarFunctions.IsAuthorized(new()
         {

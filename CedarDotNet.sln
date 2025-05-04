@@ -16,7 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CedarDotNetFFI", "CedarDotNetFFI", "{04EED10F-ECA2-441F-9251-8C246D4A6BAE}"
 	ProjectSection(SolutionItems) = preProject
 		src\CedarDotNetFfi\.gitignore = src\CedarDotNetFfi\.gitignore
-		src\CedarDotNetFfi\build-all.sh = src\CedarDotNetFfi\build-all.sh
+		src\CedarDotNetFfi\build-windows.sh = src\CedarDotNetFfi\build-windows.sh
 		src\CedarDotNetFfi\Cargo.toml = src\CedarDotNetFfi\Cargo.toml
 		src\CedarDotNetFfi\README.md = src\CedarDotNetFfi\README.md
 	EndProjectSection
