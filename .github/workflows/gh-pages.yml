@@ -1,9 +1,8 @@
 name: 📝 Generate and Publish documentation
 
 on:
-  push:
-    branches:
-    - master
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
