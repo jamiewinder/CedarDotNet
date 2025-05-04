@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: 🦀 Install Rust target
         run: rustup target add ${{ matrix.target }}
@@ -79,7 +81,7 @@ jobs:
       - name: ✅ Run .NET tests
         run: dotnet test
 
-      - name: 📦 Upload native binary
+      - name: 📤 Upload native binary
         uses: actions/upload-artifact@v4
         with:
           name: rustlib-${{ matrix.rid }}

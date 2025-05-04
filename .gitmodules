@@ -1,0 +1,3 @@
+[submodule "cedar-integration-tests"]
+	path = cedar-integration-tests
+	url = https://github.com/cedar-policy/cedar-integration-tests

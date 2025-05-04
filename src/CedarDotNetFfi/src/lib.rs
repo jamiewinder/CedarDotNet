@@ -1,6 +1,11 @@
 use std::ffi::{c_char, CString, CStr};
 
-use cedar_policy::Policy;
+use std::str::FromStr;
+
+use cedar_policy::{
+    Policy,
+    PolicySet
+};
 
 use cedar_policy::ffi::{
     check_parse_policy_set_json_str,
@@ -132,4 +137,20 @@ pub fn policy_format_json_to_text(json: *const c_char) -> *const c_char {
     let policy = Policy::from_json(None, value).expect("Could not create policy from JSON");
 
     CString::new(policy.to_string()).unwrap().into_raw()
+}
+
+#[unsafe(no_mangle)]
+pub fn load_policy_set(text: *const c_char) -> *const c_char {    
+    let text_str = unsafe { CStr::from_ptr(text).to_str().unwrap() };
+
+    let policy_set = PolicySet::from_str(text_str).expect("Could not load policy set");
+
+    let arr = policy_set
+        .policies()
+        .map(|p| p.to_string())
+        .collect::<Vec<_>>();
+
+    let result_json_str = serde_json::to_string(&arr).unwrap();
+    
+    CString::new(result_json_str.to_string()).unwrap().into_raw()
 }

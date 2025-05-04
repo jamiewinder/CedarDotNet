@@ -31,6 +31,7 @@ public sealed record class Entity
     /// The tags.
     /// </summary>
     [JsonPropertyName("tags")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IReadOnlyDictionary<string, Value> Tags { get; init; } = FrozenDictionary<string, Value>.Empty;
 
 }

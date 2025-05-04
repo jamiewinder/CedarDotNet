@@ -169,7 +169,7 @@ static void TestIsAuthorized(AuthorizationCall call)
 
 static void TestIsAuthorizedPartial(PartialAuthorizationCall call)
 {
-    var answer = CedarFunctions.IsAuthorizedPartial(call);
+    var answer = CedarExperimentalFunctions.IsAuthorizedPartial(call);
 
     WriteTitle("IsAuthorizedPartial");
     WriteAnswer(answer);

@@ -71,7 +71,7 @@ public sealed class ValueJsonConverter
             "decimal" => DecimalValue.Decode(arg),
             "datetime" => DateTimeValue.Decode(arg),
             "duration" => DurationValue.Decode(arg),
-            "ipaddr" => IpAddrValue.Decode(arg),
+            "ip" => IpAddrValue.Decode(arg),
             _ => throw new NotSupportedException($"Unsupported extension type: {fn}")
         };
     }
@@ -127,7 +127,7 @@ public sealed class ValueJsonConverter
                 WriteExtensionType(writer, "duration", durationValue.Encode());
                 break;
             case IpAddrValue ipAddrValue:
-                WriteExtensionType(writer, "ipaddr", ipAddrValue.Encode());
+                WriteExtensionType(writer, "ip", ipAddrValue.Encode());
                 break;
             default:
                 throw new NotSupportedException($"Unsupported value type: {value.GetType()}");
