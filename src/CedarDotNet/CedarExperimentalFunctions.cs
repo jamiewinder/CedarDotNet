@@ -1,12 +1,13 @@
 ﻿using CedarDotNet.Interop;
 using CedarDotNet.Models;
 using System.Diagnostics.CodeAnalysis;
+
 namespace CedarDotNet;
 
 /// <summary>
-/// The Cedar functions (Experimental)
+/// The Cedar experimental functions available through the main Cedar FFI.
 /// </summary>
-public static partial class CedarFunctions
+public static partial class CedarExperimentalFunctions
 {
     /// <summary>
     /// Evaluates an partial authorization query.
