@@ -18,7 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CedarDotNetFFI", "CedarDotN
 		src\CedarDotNetFfi\.gitignore = src\CedarDotNetFfi\.gitignore
 		src\CedarDotNetFfi\build-windows.sh = src\CedarDotNetFfi\build-windows.sh
 		src\CedarDotNetFfi\Cargo.toml = src\CedarDotNetFfi\Cargo.toml
-		src\CedarDotNetFfi\README.md = src\CedarDotNetFfi\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8503E34-403F-4C7F-9713-03B7E01FCBBB}"
@@ -36,12 +35,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedarDotNet.UnitTests", "tests\CedarDotNet.UnitTests\CedarDotNet.UnitTests.csproj", "{0A687F95-5EB9-462C-BBA4-24868FE40DFD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0B290F18-F27C-46C1-9E84-1A565C924962}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{4D550B0E-1312-47C1-AAFF-8607F9F33D8A}"
-	ProjectSection(SolutionItems) = preProject
-		src\CedarDotNetFfi\artifacts\cedar_dotnet_ffi.dll = src\CedarDotNetFfi\artifacts\cedar_dotnet_ffi.dll
-		src\CedarDotNetFfi\artifacts\libcedar_dotnet_ffi.so = src\CedarDotNetFfi\artifacts\libcedar_dotnet_ffi.so
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,7 +64,6 @@ Global
 		{C8503E34-403F-4C7F-9713-03B7E01FCBBB} = {04EED10F-ECA2-441F-9251-8C246D4A6BAE}
 		{3B69BD37-F6F9-4CB0-A351-589B1EA2A2F9} = {A687C6D7-0E58-48B7-A8CB-40558E7FCC3B}
 		{0A687F95-5EB9-462C-BBA4-24868FE40DFD} = {0B290F18-F27C-46C1-9E84-1A565C924962}
-		{4D550B0E-1312-47C1-AAFF-8607F9F33D8A} = {04EED10F-ECA2-441F-9251-8C246D4A6BAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0EB61E85-DD4C-4A83-8DDA-B3997FC10C81}

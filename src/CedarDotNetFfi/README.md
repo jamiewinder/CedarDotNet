@@ -1,3 +1,0 @@
-- Install `cross`
-- Run `build-all.sh`
-- Outputs are copied to `artifacts`
