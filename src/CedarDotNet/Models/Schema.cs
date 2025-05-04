@@ -51,13 +51,21 @@ public sealed class Schema
 public sealed class SchemaJsonConverter
     : JsonConverter<Schema>
 {
-    /// <summary>
-    /// Not implemented.
-    /// </summary>
     /// <inheritdoc />
     public override Schema? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            var schemaText = reader.GetString()!;
+            return Schema.FromText(schemaText);
+        }
+        if (reader.TokenType == JsonTokenType.StartObject)
+        {
+            var schemaNode = JsonNode.Parse(ref reader)!.AsObject();
+
+            return Schema.FromNode(schemaNode);
+        }
+        return null;
     }
 
     /// <inheritdoc />
