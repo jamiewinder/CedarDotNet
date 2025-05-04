@@ -29,6 +29,6 @@ dotnet add package CedarDotNet --prerelease
 
 - [CedarFunctions](xref:CedarDotNet.CedarFunctions) for the stable functions.
 
-- [CedarExperimentalFunctions](xref:CedarDotNet.CedarFunctions) for the experimental functions.
+- [CedarExperimentalFunctions](xref:CedarDotNet.CedarExperimentalFunctions) for the experimental functions.
 
 - [CedarUtilities](xref:CedarDotNet.CedarFunctions) for additional utilities which aren't part of the main API.
