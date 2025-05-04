@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: 🦀 Install Rust target
         run: rustup target add ${{ matrix.target }}
@@ -76,16 +78,10 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: 🧪 Checkout Cedar integration test data
-        uses: actions/checkout@v4
-        with:
-          repository: cedar-policy/cedar-integration-tests
-          path: cedar-integration-tests
-
       - name: ✅ Run .NET tests
         run: dotnet test
 
-      - name: 📦 Upload native binary
+      - name: 📤 Upload native binary
         uses: actions/upload-artifact@v4
         with:
           name: rustlib-${{ matrix.rid }}
