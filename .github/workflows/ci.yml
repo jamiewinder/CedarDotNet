@@ -6,7 +6,7 @@ on:
       - 'v*'
   pull_request:
     branches:
-      - main
+      - master
 jobs:
   build-test:
     name: 🛠️ Build & Test (${{ matrix.os }}-${{ matrix.target }})
