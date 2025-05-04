@@ -7,7 +7,7 @@ public sealed class IntegrationTests
 {
     [Theory]
     [ClassData(typeof(IntegrationTestData))]
-    public void IsAuthorized_IntegrationTest_Succeeds(
+    public void IsAuthorized_IntegrationTest_AllRequestsHaveExpectedResult(
         TestScenario scenario)
     {
         foreach (var request in scenario.Requests)
