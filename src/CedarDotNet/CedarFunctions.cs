@@ -1,5 +1,7 @@
 ﻿using CedarDotNet.Interop;
 using CedarDotNet.Models;
+using System.Runtime.InteropServices;
+using System.Text.Json;
 
 namespace CedarDotNet;
 
@@ -85,6 +87,30 @@ public static partial class CedarFunctions
             func: CedarFfi.IsAuthorized,
             inputTypeInfo: CedarJsonSerializerContext.Default.AuthorizationCall,
             outputTypeInfo: CedarJsonSerializerContext.Default.IAuthorizationAnswer);
+
+    /// <summary>
+    /// Parses a policy set into its constituent policies.
+    /// </summary>
+    /// <param name="policySetText">The policy set text.</param>
+    /// <returns>The answer.</returns>
+    public static IPolicySetTextToPartsAnswer PolicySetTextToParts(
+        string policySetText)
+    {
+        var result = CedarFfi.PolicySetTextToParts(policySetText);
+
+        try
+        {
+            var resultJson = Marshal.PtrToStringUTF8(result)!;
+
+            return JsonSerializer.Deserialize(
+                json: resultJson,
+                jsonTypeInfo: CedarJsonSerializerContext.Default.IPolicySetTextToPartsAnswer)!;
+        }
+        finally
+        {
+            CedarFfi.FreeString(result);
+        }
+    }
 
     /// <summary>
     /// Gets the language version.

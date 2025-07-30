@@ -28,6 +28,9 @@ internal static partial class CedarFfi
     [LibraryImport(CedarNativeLibrary.Name, EntryPoint = "validate", StringMarshalling = StringMarshalling.Utf8)]
     public static partial IntPtr Validate(string call);
 
+    [LibraryImport(CedarNativeLibrary.Name, EntryPoint = "policy_set_text_to_parts", StringMarshalling = StringMarshalling.Utf8)]
+    public static partial IntPtr PolicySetTextToParts(string call);
+
     [LibraryImport(CedarNativeLibrary.Name, EntryPoint = "get_lang_version", StringMarshalling = StringMarshalling.Utf8)]
     public static partial IntPtr GetLangVersion();
 
