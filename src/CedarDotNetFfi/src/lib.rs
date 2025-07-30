@@ -17,7 +17,8 @@ use cedar_policy::ffi::{
     is_authorized_partial_json_str,
     validate_json_str,
     get_lang_version as internal_get_lang_version,
-    get_sdk_version as internal_get_sdk_version
+    get_sdk_version as internal_get_sdk_version,
+    policy_set_text_to_parts as internal_policy_set_text_to_parts
 };
 
 #[unsafe(no_mangle)]
@@ -153,4 +154,15 @@ pub fn load_policy_set(text: *const c_char) -> *const c_char {
     let result_json_str = serde_json::to_string(&arr).unwrap();
     
     CString::new(result_json_str.to_string()).unwrap().into_raw()
+}
+
+#[unsafe(no_mangle)]
+pub fn policy_set_text_to_parts(text: *const c_char) -> *const c_char {
+    let text_str = unsafe { CStr::from_ptr(text).to_str().unwrap() };
+
+    let parts = internal_policy_set_text_to_parts(text_str);
+
+    let result_json_str = serde_json::to_string(&parts).expect("Could not serialize parts to JSON");
+
+    CString::new(result_json_str).unwrap().into_raw()
 }

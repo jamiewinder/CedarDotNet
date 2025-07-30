@@ -10,6 +10,7 @@ namespace CedarDotNet.Models;
 [JsonSerializable(typeof(IAuthorizationAnswer))]
 [JsonSerializable(typeof(ICheckParseAnswer))]
 [JsonSerializable(typeof(IFormattingAnswer))]
+[JsonSerializable(typeof(IPolicySetTextToPartsAnswer))]
 [JsonSourceGenerationOptions(UseStringEnumConverter = true)]
 internal sealed partial class CedarJsonSerializerContext
     : JsonSerializerContext;
