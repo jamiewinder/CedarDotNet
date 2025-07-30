@@ -16,9 +16,15 @@ public interface IPolicySetTextToPartsAnswer;
 public sealed record class PolicySetTextToPartsAnswerSuccess
     : IPolicySetTextToPartsAnswer
 {
+    /// <summary>
+    /// The policies.
+    /// </summary>
     [JsonPropertyName("policies")]
     public required IReadOnlyCollection<string> Policies { get; init; }
 
+    /// <summary>
+    /// The policy templates.
+    /// </summary>
     [JsonPropertyName("policy_templates")]
     public required IReadOnlyCollection<string> PolicyTemplates { get; init; }
 }
