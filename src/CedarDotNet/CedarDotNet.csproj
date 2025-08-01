@@ -40,6 +40,11 @@
 			CopyToOutputDirectory="PreserveNewest"
 			Link="cedar_dotnet_ffi.dll" />
 
+		<None Include="runtimes\linux-x64\native\libcedar_dotnet_ffi.so" 
+			Condition="$([MSBuild]::IsOSPlatform('Linux'))"
+			CopyToOutputDirectory="PreserveNewest"			  
+			Link="libcedar_dotnet_ffi.so" />
+
 		<None Include="runtimes\osx-x64\native\libcedar_dotnet_ffi.dylib" 
 			Condition="$([MSBuild]::IsOSPlatform('OSX'))"
 			CopyToOutputDirectory="PreserveNewest"			  
