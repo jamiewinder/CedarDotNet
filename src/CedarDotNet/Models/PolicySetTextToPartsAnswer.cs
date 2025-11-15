@@ -35,6 +35,9 @@ public sealed record class PolicySetTextToPartsAnswerSuccess
 public sealed record class PolicySetTextToPartsAnswerFailure
     : IPolicySetTextToPartsAnswer
 {
+    /// <summary>
+    /// The errors.
+    /// </summary>
     [JsonPropertyName("errors")]
     public required IReadOnlyCollection<DetailedError> Errors { get; init; }
 }
