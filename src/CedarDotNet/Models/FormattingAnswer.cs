@@ -8,14 +8,7 @@ namespace CedarDotNet.Models;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [JsonDerivedType(typeof(FormattingAnswerSuccess), "success")]
 [JsonDerivedType(typeof(FormattingAnswerFailure), "failure")]
-public interface IFormattingAnswer
-{
-    /// <summary>
-    /// The answer type.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string Type { get; }
-}
+public interface IFormattingAnswer;
 
 /// <summary>
 /// A successful formatting answer.
@@ -23,10 +16,6 @@ public interface IFormattingAnswer
 public sealed record class FormattingAnswerSuccess
     : IFormattingAnswer
 {
-    /// <inheritdoc />
-    [JsonIgnore]
-    public string Type => "success";
-
     /// <summary>
     /// The formatted policy.
     /// </summary>
@@ -40,10 +29,6 @@ public sealed record class FormattingAnswerSuccess
 public sealed record class FormattingAnswerFailure
     : IFormattingAnswer
 {
-    /// <inheritdoc />
-    [JsonIgnore]
-    public string Type => "failure";
-
     /// <summary>
     /// The errors.
     /// </summary>

@@ -8,25 +8,13 @@ namespace CedarDotNet.Models;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [JsonDerivedType(typeof(CheckParseSuccess), "success")]
 [JsonDerivedType(typeof(CheckParseFailure), "failure")]
-public interface ICheckParseAnswer
-{
-    /// <summary>
-    /// The answer type.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string Type { get; }
-}
+public interface ICheckParseAnswer;
 
 /// <summary>
 /// A successful check parse answer.
 /// </summary>
 public sealed record class CheckParseSuccess
-    : ICheckParseAnswer
-{
-    /// <inheritdoc />
-    [JsonIgnore]
-    public string Type => "success";
-}
+    : ICheckParseAnswer;
 
 /// <summary>
 /// A failed check parse answer.
@@ -34,10 +22,6 @@ public sealed record class CheckParseSuccess
 public sealed record class CheckParseFailure
     : ICheckParseAnswer
 {
-    /// <inheritdoc />
-    [JsonPropertyName("type")]
-    public string Type => "failure";
-
     /// <summary>
     /// The errors.
     /// </summary>

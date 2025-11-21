@@ -11,14 +11,7 @@ namespace CedarDotNet.Models;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [JsonDerivedType(typeof(PartialAuthorizationAnswerResiduals), "residuals")]
 [JsonDerivedType(typeof(PartialAuthorizationAnswerFailure), "failure")]
-public interface IPartialAuthorizationAnswer
-{
-    /// <summary>
-    /// The answer type.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string Type { get; }
-}
+public interface IPartialAuthorizationAnswer;
 
 /// <summary>
 /// A residuals partial authorization answer.
@@ -27,10 +20,6 @@ public interface IPartialAuthorizationAnswer
 public sealed record class PartialAuthorizationAnswerResiduals
     : IPartialAuthorizationAnswer
 {
-    /// <inheritdoc />
-    [JsonIgnore]
-    public string Type => "residuals";
-
     /// <summary>
     /// The response.
     /// </summary>
@@ -51,10 +40,6 @@ public sealed record class PartialAuthorizationAnswerResiduals
 public sealed record class PartialAuthorizationAnswerFailure
     : IPartialAuthorizationAnswer
 {
-    /// <inheritdoc />
-    [JsonPropertyName("type")]
-    public string Type => "failure";
-
     /// <summary>
     /// The errors.
     /// </summary>
