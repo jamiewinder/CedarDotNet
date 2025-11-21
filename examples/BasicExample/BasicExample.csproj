@@ -10,7 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\CedarDotNet\CedarDotNet.csproj" />
+	    <ProjectReference Include="..\..\src\CedarDotNet\CedarDotNet.csproj" />
 	</ItemGroup>
 
 </Project>
