@@ -8,14 +8,7 @@ namespace CedarDotNet.Models;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
 [JsonDerivedType(typeof(AuthorizationAnswerSuccess), "success")]
 [JsonDerivedType(typeof(AuthorizationAnswerFailure), "failure")]
-public interface IAuthorizationAnswer
-{
-    /// <summary>
-    /// The answer type.
-    /// </summary>
-    [JsonPropertyName("type")]
-    public string Type { get; }
-}
+public interface IAuthorizationAnswer;
 
 /// <summary>
 /// A successful authorization answer.
@@ -23,10 +16,6 @@ public interface IAuthorizationAnswer
 public sealed record class AuthorizationAnswerSuccess
     : IAuthorizationAnswer
 {
-    /// <inheritdoc />
-    [JsonIgnore]
-    public string Type => "success";
-
     /// <summary>
     /// The response.
     /// </summary>
@@ -46,10 +35,6 @@ public sealed record class AuthorizationAnswerSuccess
 public sealed record class AuthorizationAnswerFailure
     : IAuthorizationAnswer
 {
-    /// <inheritdoc />
-    [JsonPropertyName("type")]
-    public string Type => "failure";
-
     /// <summary>
     /// The errors.
     /// </summary>

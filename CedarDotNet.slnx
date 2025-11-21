@@ -1,0 +1,33 @@
+<Solution>
+  <Folder Name="/examples/">
+    <File Path="examples/Directory.Build.props" />
+    <Project Path="examples/BasicExample/BasicExample.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/CedarDotNet/CedarDotNet.csproj" />
+  </Folder>
+  <Folder Name="/src/CedarDotNetFFI/">
+    <File Path="src/CedarDotNetFfi/.gitignore" />
+    <File Path="src/CedarDotNetFfi/build-linux.sh" />
+    <File Path="src/CedarDotNetFfi/build-windows.sh" />
+    <File Path="src/CedarDotNetFfi/Cargo.toml" />
+  </Folder>
+  <Folder Name="/src/CedarDotNetFFI/src/">
+    <File Path="src/CedarDotNetFfi/src/lib.rs" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CedarDotNet.UnitTests/CedarDotNet.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/[root]/">
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/[root]/.github/">
+    <File Path=".github/workflows/ci.yml" />
+    <File Path=".github/workflows/gh-pages.yml" />
+  </Folder>
+  <Folder Name="/[root]/.github/workflows/">
+    <File Path=".github/workflows/ci.yml" />
+    <File Path=".github/workflows/gh-pages.yml" />
+  </Folder>
+</Solution>
